@@ -84,7 +84,7 @@ module Identity
           # Freshdesk will not allow to update description if the member name contains /, ", wwww.
           # But it ALLOWS such requesters to be created in the first place.
           # Result: such requesters cannot be updated via API without chaning their name.
-          return true if response['errors'].any? { |x|
+          return true if response['errors']&.any? { |x|
             x['field'] == 'name' && x['message'] == "/,\",www. not allowed in name"
           }
 
